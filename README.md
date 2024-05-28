@@ -1,22 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# FactClust
+# FacClust
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of FactClust is to simplify the clustering algorithm for factor
+The goal of FacClust is to simplify the clustering algorithm for factor
 variables with many levels when the data needs to be rolled up.
 
 ## Installation
 
-You can install the development version of FactClust from
+You can install the development version of FacClust from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("easoneli176/FactClust")
+devtools::install_github("easoneli176/FacClust")
 ```
 
 ## Example
