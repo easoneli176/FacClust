@@ -1,0 +1,63 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# FactClust
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of FactClust is to simplify the clustering algorithm for factor variables with many levels when the data needs to be rolled up.
+
+## Installation
+
+You can install the development version of FactClust from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("easoneli176/FactClust")
+```
+
+## Example
+
+When we have a factor variable with many levels, and we need to rollup the data by some grouping factor and calculate clusters, we begin by one-hot encoding the factor variable using the onehot function:
+
+```{r example}
+library(FacClust)
+
+mock_data <- data.frame(fac = c(rep("A",10),rep("B",10),rep("C",10),rep("D",10),rep("E",10),rep("F",10)),grp=c(rep("G1",15),rep("G2",15),rep("G3",15),rep("G4",15)))
+
+onehot(mock_data$fac)
+```
+
+Next, we calculate proportions of each factor level within each group. We can optionally use a weighting variable here to make the proportions weighted.
+
+```{r example2}
+df<-PropRollup(mock_data$fac,mock_data$grp)
+df
+```
+
+Next, we can calculate clusters on these proportions using kmeans from the base R package. The number of clusters, k, should be determined outside this package.
+
+```{r example3}
+set.seed(278613)
+km<-kmeans(x=df[,-1],centers=2)
+km
+```
+
+Finally, as long as we have named our kmeans object km, we can assign clusters to out of sample data using this function:
+
+```{r example4}
+apply(df[,-1], 1, oos_clust)
+```
