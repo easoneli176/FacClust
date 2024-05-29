@@ -15,9 +15,14 @@ onehot<-function(facvar){
 
   colnames(df)<-lvls
 
-  for (i in 1:length(facvar)){
-    updt<-which(colnames(df) == facvar[i])
-    df[i,updt]<-1
+  #works, but for some reason terribly inefficient
+  # for (i in 1:length(facvar)){
+  #   updt<-which(colnames(df) == facvar[i])
+  #   df[i,updt]<-1
+  # }
+
+  for (i in 1:length(lvls)){
+    df[,i]<-ifelse(facvar == lvls[i],1,0)
   }
 
   df
